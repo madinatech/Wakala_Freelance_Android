@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:gravity="center|start"
+        android:paddingLeft="@dimen/_10sdp"
+        android:singleLine="true"
+        android:text="At res"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp" />
+
+</LinearLayout>
