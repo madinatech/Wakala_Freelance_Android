@@ -2,55 +2,25 @@
 <resources>
     <!--<color name="colorPrimary">#146ab7</color>-->
     <color name="colorPrimary">#ff8075</color>
-    <color name="color_govern">#0b5ba3</color>
     <color name="colorPrimaryDark">#ff8075</color>
     <color name="colorAccent">#ff8075</color>
-    <color name="baseColor">#ef9300</color>
     <color name="light_grey">#F6F6F6</color>
-    <color name="light_cream">#e8e8e8</color>
     <!--<color name="colorPrimary_trans">#40146ab7</color>-->
-    <color name="colorPrimary_trans">#40ff8075</color>
-    <color name="profile_color">#f84256</color>
-    <color name="notification_color">#ecf3ff</color>
 
     <color name="red_400">#EF5350</color>
-    <color name="red_500">#F44336</color>
-    <color name="red_600">#E53935</color>
-    <color name="red_800">#C62828</color>
 
 
-    <color name="green_100">#C8E6C9</color>
-    <color name="green_300">#81C784</color>
     <color name="green_500">#4CAF50</color>
-    <color name="green_700">#388E3C</color>
 
-    <color name="yellow_800">#F9A825</color>
-
-    <color name="blue_grey_800">#37474F</color>
-
-    <color name="blue_900">#0D47A1</color>
-
-    <color name="orange_800">#EF6C00</color>
-
-    <color name="grey_50">#FAFAFA</color>
-    <color name="grey_100">#F5F5F5</color>
-    <color name="grey_200">#EEEEEE</color>
-    <color name="grey_300">#E0E0E0</color>
     <color name="grey_400">#BDBDBD</color>
     <color name="grey_500">#9E9E9E</color>
     <color name="grey_600">#757575</color>
-    <color name="grey_700">#616161</color>
     <color name="grey_800">#424242</color>
-    <color name="grey_900">#212121</color>
 
     <color name="black">#000000</color>
     <color name="trans_black">#D9000000</color>
     <color name="trans_black_light">#80000000</color>
-    <color name="trans">@android:color/transparent</color>
-    <color name="light_trans_black">#A6000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="dark_white">#dcdcdc</color>
-    <color name="fb_blue">#3B5998</color>
 
 
     <!--Light Background Dark Text-->
@@ -58,36 +28,6 @@
     <!--Dark Background Light Text-->
 
 
-    <array name="array_dot_active">
-        <item>@color/colorPrimary</item>
-        <item>@color/colorPrimary</item>
-        <item>@color/colorPrimary</item>
-        <item>@color/colorPrimary</item>
-    </array>
-
-    <array name="array_dot_inactive">
-        <item>@color/grey_400</item>
-        <item>@color/grey_400</item>
-        <item>@color/grey_400</item>
-        <item>@color/grey_400</item>
-    </array>
-    <array name="dot_inactive">
-        <item>@color/black</item>
-        <item>@color/black</item>
-        <item>@color/black</item>
-        <item>@color/black</item>
-    </array>
-
-    <color name="bright_pink">#FFFF00</color>
-    <color name="red">#0000FF</color>
-    <color name="orange">#008000</color>
-    <color name="yellow">#00FFFF</color>
-    <color name="chartreuse">#FF0000</color>
     <!--  <color name="green">#FF00FF</color>-->
-    <color name="spring_green">#FFA500</color>
-    <color name="cyan">#D3D3D3</color>
-    <color name="azure">#FF6347</color>
-    <color name="blue">#191970</color>
 
-    <color name="green">#439B3B</color>
 </resources>

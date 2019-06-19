@@ -11,12 +11,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.os.paytzwakal.reg.database.RegistrationDatabase;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -42,31 +39,6 @@ public class App extends MultiDexApplication {
         ImageLoader.getInstance().init(config.build());
     }
 
-    public static Retrofit getClient() {
-        if (new_retrofit == null) {
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.connectTimeout(180, TimeUnit.SECONDS);
-            builder.readTimeout(180, TimeUnit.SECONDS);
-            builder.writeTimeout(180, TimeUnit.SECONDS);
-
-            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-
-
-            httpClient.addInterceptor(new Interceptor() {
-                @Override
-                public okhttp3.Response intercept(Chain chain) throws IOException {
-                    Request request = chain.request().newBuilder().addHeader("REMENBER-TOKEN", Config.getRememberToken() + "." + Config.getMD5Encode()).build();
-                    return chain.proceed(request);
-                }
-            });
-            new_retrofit = new Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(Main_BASE_URL).client(httpClient.build()).build();
-        }
-        return new_retrofit;
-    }
 
     public static Retrofit getInitialClient() {
         if (retrofit == null) {

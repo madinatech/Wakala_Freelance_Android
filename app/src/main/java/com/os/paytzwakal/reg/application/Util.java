@@ -177,8 +177,8 @@ public final class Util {
 
     public static void noInternet(CoordinatorLayout coordinatorLayout, View.OnClickListener onClickListener, Context context) {
         try {
-            Snackbar snackbar = Snackbar.make(coordinatorLayout, context.getResources().getString(R.string.no_internet), Snackbar.LENGTH_LONG).setAction(context.getResources().getString(R.string.retry), onClickListener);
-            snackbar.setActionTextColor(context.getResources().getColor(R.color.red_500));
+            Snackbar snackbar = Snackbar.make(coordinatorLayout, context.getResources().getString(R.string.no_internet), Snackbar.LENGTH_LONG).setAction("Retry", onClickListener);
+            snackbar.setActionTextColor(context.getResources().getColor(R.color.red_400));
             View sbView = snackbar.getView();
             sbView.setBackgroundColor(ContextCompat.getColor(context, R.color.grey_800));
             TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
@@ -899,6 +899,22 @@ public final class Util {
         return versionName;
     }
 
+    public static File compressImage(Context context, File actualImage) {
+        File compressedImage = null;
+        try {
+            compressedImage = new Compressor(context)
+                    .setMaxWidth(640)
+                    .setMaxHeight(480)
+                    .setQuality(75)
+                    .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .compressToFile(actualImage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return compressedImage;
+    }
+
     public static void takeScreenshot(Activity context, CoordinatorLayout coordinatorLayout) throws IOException {
         Date now = new Date();
         android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
@@ -993,37 +1009,6 @@ public final class Util {
     }
 */
 
-    public static Dialog isDeativateDialog(final ConstraintLayout coordinatorLayout, final Context context, final Activity activity) {
-        if (context != null) {
-            try {
-                if (addNewDialog != null && addNewDialog.isShowing()) {
-                    addNewDialog.hide();
-                }
-                addNewDialog = new Dialog(context);
-                addNewDialog.getWindow().setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.trans)));
-                addNewDialog.setContentView(R.layout.dialog_is_deactivate);
-                addNewDialog.setCancelable(false);
-                addNewDialog.setCanceledOnTouchOutside(false);
-                TextView btnOk = (TextView) addNewDialog.findViewById(R.id.btnOk);
-
-                btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (addNewDialog != null && addNewDialog.isShowing()) {
-                            addNewDialog.dismiss();
-                        }
-//                        Util.doLogout(coordinatorLayout,context, activity);
-                    }
-                });
-                addNewDialog.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return addNewDialog;
-        } else {
-            return null;
-        }
-    }
 
     public static void doSFlagLogout(final ConstraintLayout coordinatorLayout, final Context context, final Activity activity) {
         Config.setLogoutStatus(true);

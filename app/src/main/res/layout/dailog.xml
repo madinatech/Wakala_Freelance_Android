@@ -178,7 +178,41 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll4" />
+            <LinearLayout
+                android:id="@+id/ll6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view4">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Beneficiary name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/tv_benificaryname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey_400"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll6" />
             <LinearLayout
                 android:id="@+id/ll5"
                 android:layout_width="match_parent"
@@ -186,7 +220,7 @@
                 android:padding="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view4">
+                app:layout_constraintTop_toBottomOf="@+id/view6">
 
                 <TextView
                     android:layout_width="0dp"
@@ -215,41 +249,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll5" />
 
-            <LinearLayout
-                android:id="@+id/ll6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_20sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view5">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Beneficiary name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
-
-                <TextView
-                    android:id="@+id/tv_benificaryname"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view6"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/grey_400"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll6" />
 
             <LinearLayout
                 android:id="@+id/ll7"
@@ -258,7 +257,7 @@
                 android:padding="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view6">
+                app:layout_constraintTop_toBottomOf="@+id/view5">
 
                 <TextView
                     android:layout_width="0dp"
@@ -288,6 +287,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ll7" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/ll8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
