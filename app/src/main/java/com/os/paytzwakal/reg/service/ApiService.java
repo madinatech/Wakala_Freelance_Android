@@ -30,11 +30,11 @@ public interface ApiService {
     @Multipart
     @POST("wakala_regestration")
     Call<RegistrationResponse> wakala_regestration(@PartMap Map<String, RequestBody> comRequest,
-                                                   @Part MultipartBody.Part image,
-                                                   @Part MultipartBody.Part image1,
-                                                   @Part MultipartBody.Part image2,
-                                                   @Part MultipartBody.Part image3,
-                                                   @Part MultipartBody.Part image4);
+                                                   @Part MultipartBody.Part id_doc,
+                                                   @Part MultipartBody.Part tin_doc,
+                                                   @Part MultipartBody.Part license_doc,
+                                                   @Part MultipartBody.Part permit_1_doc,
+                                                   @Part MultipartBody.Part agreement_doc);
 
     @Headers(
             {"Content-Type: application/json", "REMENBER-TOKEN: awsderegtejkdfhsdfsjfd"})

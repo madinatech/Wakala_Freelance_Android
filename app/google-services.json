@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "252489503028",
+    "firebase_url": "https://wakalaregistration.firebaseio.com",
+    "project_id": "wakalaregistration",
+    "storage_bucket": "wakalaregistration.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252489503028:android:53e72e1dd784055b",
+        "android_client_info": {
+          "package_name": "com.os.paytzwakal.reg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252489503028-5t746p54f5mim2p5oo1jp81gs8pre2b6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQmCB70nR8s1n7UUeNtwfevuUrPnh9m8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252489503028-5t746p54f5mim2p5oo1jp81gs8pre2b6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

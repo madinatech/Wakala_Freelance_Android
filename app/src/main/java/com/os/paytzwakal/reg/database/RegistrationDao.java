@@ -10,7 +10,7 @@ import java.util.List;
 @Dao
 public interface RegistrationDao {
 
-    @Query("SELECT * FROM registartiondata")
+    @Query("SELECT * FROM registartiondata ORDER BY created DESC")
     List<RegistartionData> getAllData();
 
     @Insert

@@ -32,7 +32,6 @@ public class RegistarionFormListActivity extends AppCompatActivity implements Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registarion_form_list);
         init();
-
     }
 
     private void init() {

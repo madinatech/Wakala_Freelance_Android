@@ -49,6 +49,7 @@ import com.os.paytzwakal.reg.R;
 import com.os.paytzwakal.reg.application.App;
 import com.os.paytzwakal.reg.application.Compressor;
 import com.os.paytzwakal.reg.application.Config;
+import com.os.paytzwakal.reg.application.FilePath;
 import com.os.paytzwakal.reg.application.Util;
 import com.os.paytzwakal.reg.database.RegistartionData;
 import com.os.paytzwakal.reg.database.RegistrationDatabase;
@@ -78,6 +79,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    final String[] requiredPermissions = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+    };
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_PICK = 2;
@@ -285,66 +291,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.id_doc: {
                 button_click = 1;
 
-                try {
-                    if (android.os.Build.VERSION.SDK_INT >= 23) {
-                        askPermission();
-                    } else {
-                        showPopmenu();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                if (areCameraPermissionGranted()) {
+                    showPopmenu();
+                } else {
+                    requestCameraPermissions();
                 }
                 break;
             }
             case R.id.tin_doc: {
                 button_click = 2;
-                try {
-                    if (android.os.Build.VERSION.SDK_INT >= 23) {
-                        askPermission();
-                    } else {
-                        showPopmenu();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                if (areCameraPermissionGranted()) {
+                    showPopmenu();
+                } else {
+                    requestCameraPermissions();
                 }
                 break;
             }
             case R.id.agreement_doc: {
                 button_click = 5;
-                try {
-                    if (android.os.Build.VERSION.SDK_INT >= 23) {
-                        askPermission();
-                    } else {
-                        showPopmenu();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                if (areCameraPermissionGranted()) {
+                    showPopmenu();
+                } else {
+                    requestCameraPermissions();
                 }
                 break;
             }
             case R.id.license_doc: {
                 button_click = 3;
-                try {
-                    if (android.os.Build.VERSION.SDK_INT >= 23) {
-                        askPermission();
-                    } else {
-                        showPopmenu();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                if (areCameraPermissionGranted()) {
+                    showPopmenu();
+                } else {
+                    requestCameraPermissions();
                 }
                 break;
             }
             case R.id.permit_1_doc: {
                 button_click = 4;
-                try {
-                    if (android.os.Build.VERSION.SDK_INT >= 23) {
-                        askPermission();
-                    } else {
-                        showPopmenu();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                if (areCameraPermissionGranted()) {
+                    showPopmenu();
+                } else {
+                    requestCameraPermissions();
                 }
                 break;
             }
@@ -584,40 +570,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MultipartBody.Part doc_image4 = null;
                 if (imageFile == null) {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-                    doc_image = MultipartBody.Part.createFormData("image", "", requestFile);
+                    doc_image = MultipartBody.Part.createFormData("id_doc", "", requestFile);
                 } else {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile);
-                    doc_image = MultipartBody.Part.createFormData("image", imageFile.getName(), requestFile);
+                    doc_image = MultipartBody.Part.createFormData("id_doc", imageFile.getName(), requestFile);
                 }
                 if (imageFile1 == null) {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-                    doc_image1 = MultipartBody.Part.createFormData("image", "", requestFile);
+                    doc_image1 = MultipartBody.Part.createFormData("tin_doc", "", requestFile);
                 } else {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile1);
-                    doc_image1 = MultipartBody.Part.createFormData("image", imageFile1.getName(), requestFile);
+                    doc_image1 = MultipartBody.Part.createFormData("tin_doc", imageFile1.getName(), requestFile);
                 }
 
 
                 if (imageFile2 == null) {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-                    doc_image2 = MultipartBody.Part.createFormData("image", "", requestFile);
+                    doc_image2 = MultipartBody.Part.createFormData("license_doc", "", requestFile);
                 } else {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile2);
-                    doc_image2 = MultipartBody.Part.createFormData("image", imageFile2.getName(), requestFile);
+                    doc_image2 = MultipartBody.Part.createFormData("license_doc", imageFile2.getName(), requestFile);
                 }
                 if (imageFile3 == null) {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-                    doc_image3 = MultipartBody.Part.createFormData("image", "", requestFile);
+                    doc_image3 = MultipartBody.Part.createFormData("permit_1_doc", "", requestFile);
                 } else {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile3);
-                    doc_image3 = MultipartBody.Part.createFormData("image", imageFile3.getName(), requestFile);
+                    doc_image3 = MultipartBody.Part.createFormData("permit_1_doc", imageFile3.getName(), requestFile);
                 }
                 if (imageFile4 == null) {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-                    doc_image4 = MultipartBody.Part.createFormData("image", "", requestFile);
+                    doc_image4 = MultipartBody.Part.createFormData("agreement_doc", "", requestFile);
                 } else {
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile4);
-                    doc_image4 = MultipartBody.Part.createFormData("image", imageFile4.getName(), requestFile);
+                    doc_image4 = MultipartBody.Part.createFormData("agreement_doc", imageFile4.getName(), requestFile);
                 }
 
 
@@ -673,19 +659,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void askPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]
-                    {
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.CAMERA,
-                    }, 1);
-        } else {
-            showPopmenu();
-        }
-    }
+    private boolean areCameraPermissionGranted() {
 
+        for (String permission : requiredPermissions) {
+            if (!(ActivityCompat.checkSelfPermission(MainActivity.this, permission) ==
+                    PackageManager.PERMISSION_GRANTED)) {
+                return false;
+            }
+        }
+        return true;
+    }
     private void showPopmenu() {
         dialog = new Dialog(MainActivity.this, R.style.AppTheme);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -851,11 +834,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     "\nBank name: " + bankname +
                     "\nBeneficiary name: " + et_benificary_name.getText().toString().trim() +
                     "\nBank account number: " + et_account_number.getText().toString().trim() +
-                    "\nCity: " + city_id +
+                    "\nCity: " + cityname +
                     "\nContatct person: " + et_contact_person.getText().toString().trim() +
                     "\nContatct number: " + et_contactnumber.getText().toString().trim() +
-                    "\nLocation: " + et_location.getText().toString().trim() +
-                    "\nPin: " + et_pin.getText().toString().trim())
+                    "\nLocation: " + et_location.getText().toString().trim())
                     .setCancelable(false)
                     .setPositiveButton("Continue ", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -937,7 +919,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             e.printStackTrace();
                         }
                         if (bitmap != null) {
-                            photoFile = new File(uri.toString());
+                            try {
+                                photoFile = FilePath.getFile(this, uri);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             photoFile = compressImage(MainActivity.this, photoFile);
                             if (button_click == 1) {
                                 imageFile = photoFile;
@@ -983,7 +969,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         e.printStackTrace();
                     }
                     if (bitmap != null) {
-                        photoFile = new File(filePath.toString());
+//                        photoFile = new File(filePath.toString());
+                        try {
+                            photoFile = FilePath.getFile(this, filePath);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                         photoFile = compressImage(MainActivity.this, photoFile);
                         if (button_click == 1) {
                             imageFile = photoFile;
@@ -1021,33 +1013,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-       /* if (imageBitmap != null) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
 
-            Intent intent = new Intent(MainActivity.this, IncidentReportActivity.class);
-            intent.putExtra("capturedImageBitmap", Base64.encodeToString(byteArray, Base64.DEFAULT));
-            intent.putExtra("capturedImageTimestamp", AppUtils.capturedImageDateFormat.format(date));
-            startActivity(intent);
-        }*/
 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_IMAGE_CAPTURE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    fetchImageFromCamera();
-                break;
 
-            case REQUEST_IMAGE_PICK:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    fetchImageFromGallery();
+        boolean areAllPermissionsGranted = true;
+        for (int result : grantResults) {
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                areAllPermissionsGranted = false;
                 break;
-            default:
-                break;
+            }
         }
+
+        if (areAllPermissionsGranted) {
+//            showPopmenu();
+        } else {
+//            requestCameraPermissions();
+        }
+
     }
 
     public void getToCamera(View view) {
@@ -1063,9 +1048,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void fetchImageFromCamera() {
-      /*  Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null)
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);*/
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
 
@@ -1118,4 +1101,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
         }
     }
+
+    private void requestCameraPermissions() {
+        ActivityCompat.requestPermissions(
+                MainActivity.this,
+                requiredPermissions,
+                REQUEST_IMAGE_CAPTURE);
+    }
+
+
 }

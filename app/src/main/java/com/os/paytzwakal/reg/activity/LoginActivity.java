@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        Fabric.with(this, new Crashlytics());
         if (Config.getIsfirstlogin().equalsIgnoreCase("true")) {
             Intent i = new Intent(LoginActivity.this, RegistarionFormListActivity.class);
             startActivity(i);
