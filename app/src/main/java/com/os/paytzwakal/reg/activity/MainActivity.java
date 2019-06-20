@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String selectedImagePath;
     private TextView tv;
     private File photoFile;
+    private Uri photoURI;
 
     public static File compressImage(Context context, File actualImage) {
         File compressedImage = null;
@@ -669,6 +670,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return true;
     }
+
     private void showPopmenu() {
         dialog = new Dialog(MainActivity.this, R.style.AppTheme);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -862,42 +864,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Date date = null;
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 //            Uri uri = data.getData();
-            Log.e("camera uri", Uri.fromFile(photoFile) + "");
+            Log.e("camera uri", photoFile + "");
 //            Bundle extras = data.getExtras();
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 2; //4, 8, etc. the more value, the worst quality of image
-            try {
-                imageBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.fromFile(photoFile)), null, options);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            if (imageBitmap != null) {
-                photoFile = compressImage(MainActivity.this, photoFile);
-                if (button_click == 1) {
-                    imageFile = photoFile;
-                    tv_id_doc.setText("");
-                    tv_id_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
-                    tv_id_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
-                } else if (button_click == 2) {
-                    tv_tin_doc.setText("");
-                    tv_tin_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
-                    tv_tin_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
-                    imageFile1 = photoFile;
-                } else if (button_click == 3) {
-                    tv_license_doc.setText("");
-                    tv_license_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
-                    tv_license_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
-                    imageFile2 = photoFile;
-                } else if (button_click == 4) {
-                    tv_permit_1_doc.setText("");
-                    tv_permit_1_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
-                    tv_permit_1_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
-                    imageFile3 = photoFile;
-                } else if (button_click == 5) {
-                    tv_agreement_doc.setText("");
-                    tv_agreement_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
-                    tv_agreement_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
-                    imageFile4 = photoFile;
+            if (photoURI != null) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 2; //4, 8, etc. the more value, the worst quality of image
+                try {
+                    imageBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(photoURI), null, options);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if (imageBitmap != null) {
+                    photoFile = compressImage(MainActivity.this, photoFile);
+                    if (button_click == 1) {
+                        imageFile = photoFile;
+                        tv_id_doc.setText("");
+                        tv_id_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
+                        tv_id_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
+                    } else if (button_click == 2) {
+                        tv_tin_doc.setText("");
+                        tv_tin_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
+                        tv_tin_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
+                        imageFile1 = photoFile;
+                    } else if (button_click == 3) {
+                        tv_license_doc.setText("");
+                        tv_license_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
+                        tv_license_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
+                        imageFile2 = photoFile;
+                    } else if (button_click == 4) {
+                        tv_permit_1_doc.setText("");
+                        tv_permit_1_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
+                        tv_permit_1_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
+                        imageFile3 = photoFile;
+                    } else if (button_click == 5) {
+                        tv_agreement_doc.setText("");
+                        tv_agreement_doc.setBackground(new BitmapDrawable(getResources(), imageBitmap));
+                        tv_agreement_doc.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_success, 0);
+                        imageFile4 = photoFile;
+                    }
                 }
             }
         } else if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
@@ -1058,7 +1062,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("lkklkl", "FILE NOT CREATED");
             }
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(MainActivity.this, "com.os.paytzwakala.provider", photoFile);
+                photoURI = FileProvider.getUriForFile(MainActivity.this, "com.os.paytzwakala.provider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
@@ -1107,6 +1111,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainActivity.this,
                 requiredPermissions,
                 REQUEST_IMAGE_CAPTURE);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (photoURI != null) {
+            outState.putString("cameraImageUri", photoURI.toString());
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState.containsKey("cameraImageUri")) {
+            photoURI = Uri.parse(savedInstanceState.getString("cameraImageUri"));
+        }
     }
 
 
