@@ -69,7 +69,7 @@ public class RegistarionFormListActivity extends AppCompatActivity implements Vi
         switch (v.getId()) {
             case R.id.btn_registartion: {
                 startActivity(new Intent(this, MainActivity.class));
-//                finish();
+                finish();
                 break;
             }
             case R.id.imvBack: {
@@ -109,7 +109,7 @@ public class RegistarionFormListActivity extends AppCompatActivity implements Vi
                     }
                 }.execute();
                 finish();
-                startActivity(new Intent(RegistarionFormListActivity.this, LoginActivity.class));
+                startActivity(new Intent(RegistarionFormListActivity.this, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
             }
         });

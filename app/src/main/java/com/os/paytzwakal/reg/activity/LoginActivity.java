@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.crashlytics.android.Crashlytics;
 import com.os.paytzwakal.reg.R;
 import com.os.paytzwakal.reg.application.App;
 import com.os.paytzwakal.reg.application.Config;
@@ -22,6 +23,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
+import io.fabric.sdk.android.Fabric;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics());
         if (Config.getIsfirstlogin().equalsIgnoreCase("true")) {
             Intent i = new Intent(LoginActivity.this, RegistarionFormListActivity.class);
             startActivity(i);

@@ -864,8 +864,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Date date = null;
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 //            Uri uri = data.getData();
-            Log.e("camera uri", photoFile + "");
-//            Bundle extras = data.getExtras();
+//            Log.e("camera uri", photoFile + "");
+//             Bundle extras = data.getExtras();
             if (photoURI != null) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 2; //4, 8, etc. the more value, the worst quality of image
