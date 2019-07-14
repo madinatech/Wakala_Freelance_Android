@@ -30,7 +30,7 @@
             android:layout_gravity="start"
             android:onClick="onClick"
             android:padding="10dp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/back" />
 
         <TextView
             android:id="@+id/toolbar_title"
